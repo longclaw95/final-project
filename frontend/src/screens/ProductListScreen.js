@@ -5,7 +5,7 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { Table,Button,Row ,Col } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import {PRODUCT_CREATE_RESET} from '../JS/constants/productConstants'
+import {PRODUCT_CREATE_RESET,PRODUCT_DETAILS_RESET} from '../JS/constants/productConstants'
 
 
 const ProductListScreen = ({history , match}) => {
@@ -24,6 +24,7 @@ const ProductListScreen = ({history , match}) => {
     
     const dispatch = useDispatch()
     useEffect(() => {
+        
         dispatch({type : PRODUCT_CREATE_RESET})
 
         if (! userInfo.isAdmin) {
@@ -96,7 +97,7 @@ const ProductListScreen = ({history , match}) => {
 
                 <td>
                 <LinkContainer to={`/admin/product/${product._id}/edit`}>
-                    <Button variant='light' className='btn-sm'>
+                    <Button variant='light' className='btn-sm' onClick={()=>{dispatch({type : PRODUCT_DETAILS_RESET})}}>
                       <i className='fas fa-edit'></i>
                     </Button>
                   </LinkContainer>

@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import {listProductDetails,updateProduct} from '../JS/actions/productActions'
-import { PRODUCT_EDIT_RESET } from '../JS/constants/productConstants'
+import { PRODUCT_EDIT_RESET,PRODUCT_DETAILS_RESET } from '../JS/constants/productConstants'
 import axios from 'axios'
 
 
@@ -32,6 +32,8 @@ const ProductEditScreen = ({match,history}) => {
 
     const productEdit = useSelector(state => state.productEdit)
     const {error : errorEdit ,loading : loadingEdit,success : successEdit} = productEdit
+
+    
 
     
 
@@ -88,11 +90,13 @@ const ProductEditScreen = ({match,history}) => {
             _id : productId,
             name,price,brand,image,category,description,countInStock
         }))
+        dispatch({type : PRODUCT_DETAILS_RESET})
+        
     }
     
     return (
         <>
-        <Link to='/admin/productList' className='btn btn-light my-3'>Go back</Link>
+        <Link to='/admin/productList' className='btn btn-light my-3'><Button onClick={()=>{dispatch({type : PRODUCT_DETAILS_RESET})}}>Go back</Button></Link>
         <FormContainer>
       <h1>Edit Product</h1>
       {loadingEdit && <Loader/>}
